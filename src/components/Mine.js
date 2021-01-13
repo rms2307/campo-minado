@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     coreMine: {
-        height: 14,
-        width: 14,
+        height: 12,
+        width: 12,
         borderRadius: 10,
         backgroundColor: 'black',
         alignItems: 'center',
