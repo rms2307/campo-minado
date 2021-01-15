@@ -3,6 +3,7 @@ import { SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
 
 import params from './src/params'
 import MineField from './src/components/MineField'
+import Header from './src/components/Header'
 import {
   createMinedBoard,
   cloneBoard,
@@ -10,7 +11,8 @@ import {
   openField,
   showMines,
   wonGame,
-  invertFlag
+  invertFlag,
+  flagsUsed
 } from './src/logics'
 
 export default () => {
@@ -63,9 +65,12 @@ export default () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Iniciando o Mines...</Text>
-      <Text>Tamanho da grade:
-        {params.getRowsAmount()}X{params.getColumnsAmount()}</Text>
+      <Header flagsLeft={minesAmount() - flagsUsed(board)}
+        onNewGame={() => {
+          setBoard(createMinedBoard(rows, cols, minesAmount()))
+          setLost(false)
+          setWon(false)
+        }} />
       <View style={styles.board}>
         <MineField board={board}
           onOpenField={onOpenField}
