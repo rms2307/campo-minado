@@ -9,7 +9,8 @@ import {
   hadExplosion,
   openField,
   showMines,
-  wonGame
+  wonGame,
+  invertFlag
 } from './src/logics'
 
 export default () => {
@@ -47,13 +48,28 @@ export default () => {
     setLost(lost)
   }
 
+  onSelectField = (row, column) => {
+    const clonedBoard = cloneBoard(board)
+    invertFlag(clonedBoard, row, column)
+    const won = wonGame(clonedBoard)
+
+    if (won) {
+      Alert.alert('PARABÉNS', 'Você Venceu!!!')
+    }
+
+    setBoard(clonedBoard)
+    setWon(won)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <Text>Iniciando o Mines...</Text>
       <Text>Tamanho da grade:
         {params.getRowsAmount()}X{params.getColumnsAmount()}</Text>
       <View style={styles.board}>
-        <MineField board={board} onOpenField={onOpenField} />
+        <MineField board={board}
+          onOpenField={onOpenField}
+          onSelectField={onSelectField} />
       </View>
     </SafeAreaView>
   );
