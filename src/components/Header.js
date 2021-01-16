@@ -5,12 +5,12 @@ import Flag from './Flag'
 export default props => {
     return (
         <View style={styles.container}>
-            <View>
+            <View style={styles.flagContainer}>
                 <TouchableOpacity onPress={props.onFlagPress}
                     style={styles.flagButton}>
                     <Flag bigger />
                 </TouchableOpacity>
-                <Text style={styles.flagsLeft}>  =  {props.flagsLeft}</Text>
+                <Text style={styles.flagsLeft}>= {props.flagsLeft}</Text>
             </View>
             <TouchableOpacity style={styles.button}
                 onPress={props.onNewGame}>
@@ -44,8 +44,9 @@ const styles = StyleSheet.create({
         marginLeft: 20,
     },
     button: {
-        backgroundColor: '#999',
+        backgroundColor: 'green',
         padding: 5,
+        borderRadius: 5
     },
     buttonLabel: {
         fontSize: 20,
