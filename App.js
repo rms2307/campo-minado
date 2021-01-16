@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet, Text, View, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, StyleSheet, View, Alert, BackHandler } from 'react-native';
 
 import params from './src/params'
 import MineField from './src/components/MineField'
@@ -40,11 +40,51 @@ export default () => {
 
     if (lost) {
       showMines(clonedBoard)
-      Alert.alert('Você Perdeuuu!!!', 'Que Penaaa!!!')
+      Alert.alert(
+        'BOOOMMMMMM!!!',
+        'Você perdeu! O que deseja fazer?',
+        [
+          {
+            text: 'Fechar',
+            style: 'cancel'
+          },
+          {
+            text: 'Sair do Jogo',
+            onPress: () => BackHandler.exitApp()
+          },
+          {
+            text: 'Novo Jogo',
+            onPress: () => {
+              setBoard(createMinedBoard(rows, cols, minesAmount()))
+              setLost(false)
+              setWon(false)
+            }
+          }
+        ])
     }
 
     if (won) {
-      Alert.alert('PARABÉNS', 'Você Venceu!!!')
+      Alert.alert(
+        'PARABÉNS',
+        'Você venceu! O que deseja fazer?',
+        [
+          {
+            text: 'Fechar',
+            style: 'cancel'
+          },
+          {
+            text: 'Sair do Jogo',
+            onPress: () => BackHandler.exitApp()
+          },
+          {
+            text: 'Novo Jogo',
+            onPress: () => {
+              setBoard(createMinedBoard(rows, cols, minesAmount()))
+              setLost(false)
+              setWon(false)
+            }
+          }
+        ])
     }
 
     setBoard(clonedBoard)
